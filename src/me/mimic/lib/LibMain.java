@@ -1,4 +1,4 @@
-package me.xorrad.lib;
+package me.mimic.lib;
 
 import org.bukkit.plugin.java.JavaPlugin;
 

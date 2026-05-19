@@ -1,6 +1,6 @@
-package me.xorrad.lib.configs;
+package me.mimic.lib.configs;
 
-import me.xorrad.lib.LibMain;
+import me.mimic.lib.LibMain;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;

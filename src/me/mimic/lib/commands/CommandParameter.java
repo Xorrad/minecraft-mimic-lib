@@ -1,4 +1,4 @@
-package me.xorrad.lib.commands;
+package me.mimic.lib.commands;
 
 import java.util.function.Function;
 

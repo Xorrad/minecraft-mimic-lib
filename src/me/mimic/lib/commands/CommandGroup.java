@@ -1,13 +1,12 @@
-package me.xorrad.lib.commands;
+package me.mimic.lib.commands;
 
-import me.xorrad.lib.LibMain;
+import me.mimic.lib.LibMain;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
 
 import java.util.*;
-import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
 public class CommandGroup {

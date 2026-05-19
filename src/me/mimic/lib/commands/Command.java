@@ -1,4 +1,4 @@
-package me.xorrad.lib.commands;
+package me.mimic.lib.commands;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

@@ -1,7 +1,7 @@
-package me.xorrad.lib.ui;
+package me.mimic.lib.ui;
 
-import me.xorrad.lib.LibMain;
-import me.xorrad.lib.util.TriFunction;
+import me.mimic.lib.LibMain;
+import me.mimic.lib.util.TriFunction;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

@@ -1,4 +1,4 @@
-package me.xorrad.lib.ui;
+package me.mimic.lib.ui;
 
 public enum ItemClickResult {
     NO_RESULT,

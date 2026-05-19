@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/minecraft-mimiclib.iml" filepath="$PROJECT_DIR$/minecraft-mimiclib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/minecraft-mimic-lib.iml" filepath="$PROJECT_DIR$/minecraft-mimic-lib.iml" />
     </modules>
   </component>
 </project>
