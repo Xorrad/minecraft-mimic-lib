@@ -7,6 +7,7 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
 
 import java.util.*;
+import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
 public class CommandGroup {
@@ -19,6 +20,7 @@ public class CommandGroup {
     public CommandGroup(String name) {
         this.name = name;
         this.commands = new HashMap<>();
+        newDefaultCommand();
     }
 
     public String getName() {
@@ -93,23 +95,52 @@ public class CommandGroup {
 
     public String[] parseStrings(String[] strings) {
         ArrayList<String> parameters = new ArrayList<>();
+
         boolean inQuote = false;
-        String quote = "";
-        for(int i = 0; i < strings.length; i++) {
-            if(strings[i].equalsIgnoreCase("\"")) { // Check for beginning/end of quote.
-                if(inQuote)
-                    parameters.add(quote);
-                inQuote = !inQuote;
-                quote = "";
+        StringBuilder quote = new StringBuilder();
+
+        for (String s : strings) {
+
+            // Starts and ends with quote: "hello"
+            if (s.startsWith("\"") && s.endsWith("\"") && s.length() >= 2) {
+                parameters.add(s.substring(1, s.length() - 1));
                 continue;
             }
-            if(inQuote) {
-                quote += strings[i];
+
+            // Start of quoted string
+            if (s.startsWith("\"")) {
+                inQuote = true;
+                quote.setLength(0);
+                quote.append(s.substring(1));
                 continue;
             }
-            parameters.add(strings[i]);
+
+            // End of quoted string
+            if (s.endsWith("\"") && inQuote) {
+                quote.append(" ");
+                quote.append(s.substring(0, s.length() - 1));
+
+                parameters.add(quote.toString());
+                quote.setLength(0);
+                inQuote = false;
+                continue;
+            }
+
+            // Inside quoted string
+            if (inQuote) {
+                quote.append(" ");
+                quote.append(s);
+            } else {
+                parameters.add(s);
+            }
         }
-        return parameters.toArray(String[]::new);
+
+        // Handle unclosed quote
+        if (quote.length() > 0) {
+            parameters.add(quote.toString());
+        }
+
+        return parameters.toArray(new String[0]);
     }
 
     public void register() {
@@ -123,6 +154,7 @@ public class CommandGroup {
         @Override
         public boolean onCommand(CommandSender sender, org.bukkit.command.Command cmd, String alias, String[] strings) {
             strings = parseStrings(strings); // Merge words between quotes as a single string.
+
             Command command = getTargetCommand(strings);
             if(command == null) {
                 sender.sendMessage("§cInvalid syntax! " + getUsage());
